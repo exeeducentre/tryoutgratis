@@ -1,0 +1,480 @@
+<!DOCTYPE html>
+<html lang="id" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Try Out Gratis - EXE Education Centre</title>
+    
+    <!-- Favicon (Opsional) -->
+    <link rel="icon" href="favicon.png" type="image/png">
+    
+    <!-- Google Fonts: Poppins -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Tailwind Config -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: { sans: ['Poppins', 'sans-serif'] },
+                    colors: {
+                        brand: {
+                            pink: '#d81b60',
+                            orange: '#f57c00',
+                            yellow: '#fbc02d',
+                            dark: '#1f2022',
+                            blue: '#2563eb'
+                        }
+                    }
+                }
+            }
+        };
+    </script>
+
+    <style>
+        /* Gradasi EXE */
+        .bg-gradient-brand { background: linear-gradient(135deg, #d81b60 0%, #f57c00 50%, #fbc02d 100%); }
+        .text-gradient-brand { background: linear-gradient(135deg, #d81b60 0%, #f57c00 50%, #fbc02d 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        
+        /* View Controller (SPA) */
+        .view-section { display: none; animation: fadeIn 0.5s ease-in-out; }
+        .view-section.active { display: block; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(15px); } to { opacity: 1; transform: translateY(0); } }
+        
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar-track { background: #f1f1f1; }
+        ::-webkit-scrollbar-thumb { background: #d81b60; border-radius: 10px; }
+
+        /* Hide Number Input Arrows */
+        input[type=number]::-webkit-inner-spin-button, 
+        input[type=number]::-webkit-outer-spin-button { -webkit-appearance: none; margin: 0; }
+    </style>
+</head>
+<body class="font-sans text-gray-800 antialiased bg-slate-50 relative min-h-screen flex flex-col selection:bg-brand-pink selection:text-white">
+
+    <!-- GLOBAL NAVBAR & CTA -->
+    <nav class="fixed w-full z-50 bg-white/90 backdrop-blur-md shadow-sm border-b border-slate-200 transition-all duration-300" id="navbar">
+        <div class="max-w-5xl mx-auto px-4 sm:px-6 h-16 md:h-20 flex justify-between items-center">
+            <div class="flex items-center gap-3">
+                <img class="h-8 md:h-10 w-auto" src="https://images2.imgbox.com/ad/c5/3XFVIZZN_o.png" alt="Logo EXE">
+                <span class="hidden md:inline-block font-bold text-slate-400 border-l-2 border-slate-200 pl-3 ml-1 text-sm tracking-widest uppercase">Free Try Out</span>
+            </div>
+            
+            <!-- GLOBAL CTA BUTTON: Selalu Terlihat -->
+            <a href="https://wa.me/6285141525668?text=Halo%20Admin,%20saya%20tertarik%20dengan%20program%20EXE%20Bimbel" target="_blank" class="flex items-center gap-2 bg-brand-dark text-white px-4 py-2 md:px-5 md:py-2.5 rounded-full text-xs md:text-sm font-bold hover:bg-black hover:shadow-lg transition-all border-2 border-transparent hover:border-brand-yellow">
+                <i class="fab fa-whatsapp text-brand-yellow"></i>
+                <span class="hidden sm:inline">Tanya Program Spesial</span>
+                <span class="sm:hidden">Daftar</span>
+            </a>
+        </div>
+    </nav>
+
+    <!-- FLOATING PROMO BANNER (Bisa di-close) -->
+    <div id="promo-banner" class="fixed bottom-0 left-0 w-full bg-gradient-brand text-white p-3 z-[60] flex justify-between items-center shadow-[0_-4px_20px_rgba(0,0,0,0.15)] transition-transform duration-500">
+        <div class="max-w-5xl mx-auto w-full flex justify-between items-center px-4">
+            <div class="flex items-center gap-3">
+                <i class="fas fa-gift text-2xl animate-bounce"></i>
+                <div>
+                    <p class="text-xs md:text-sm font-bold">Daftar Bimbel Bulan Ini, Diskon 10%!</p>
+                    <p class="text-[10px] md:text-xs opacity-90 hidden sm:block">Fasilitas premium, jaminan pemahaman konsep.</p>
+                </div>
+            </div>
+            <div class="flex items-center gap-4">
+                <a href="https://wa.me/6285141525668" target="_blank" class="bg-white text-brand-pink text-xs md:text-sm font-bold px-4 py-1.5 rounded-full hover:shadow-md transition-all whitespace-nowrap">
+                    Klaim Promo
+                </a>
+                <button onclick="document.getElementById('promo-banner').style.transform = 'translateY(100%)'" class="text-white hover:text-gray-200">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- MAIN WRAPPER -->
+    <main class="flex-grow pt-24 pb-24 px-4 w-full text-brand-dark flex flex-col items-center">
+
+        <!-- ============================================== -->
+        <!-- VIEW 1: DATA DIRI (LEAD GENERATION)            -->
+        <!-- ============================================== -->
+        <section id="view-lead" class="view-section active w-full max-w-lg mt-4 md:mt-10">
+            <div class="text-center mb-8">
+                <div class="inline-block bg-pink-100 text-brand-pink px-4 py-1.5 rounded-full text-xs font-bold mb-4 uppercase tracking-widest border border-pink-200">
+                    Langkah 1 dari 3
+                </div>
+                <h1 class="text-3xl md:text-4xl font-extrabold text-brand-dark mb-3">Mulai Uji Kemampuanmu!</h1>
+                <p class="text-slate-500 text-sm md:text-base">Isi data singkat ini untuk mendapatkan akses 100% GRATIS ke simulasi Try Out EXE.</p>
+            </div>
+
+            <div class="bg-white p-6 md:p-8 rounded-[2rem] shadow-xl border border-slate-100 relative overflow-hidden">
+                <!-- Dekorasi -->
+                <div class="absolute top-0 right-0 w-32 h-32 bg-gradient-brand opacity-10 rounded-bl-[100px] pointer-events-none"></div>
+
+                <form id="lead-form" onsubmit="processLead(event)" class="space-y-5 relative z-10">
+                    <div>
+                        <label class="block text-xs font-bold text-slate-500 uppercase tracking-wider mb-1 ml-1">Nama Lengkap <span class="text-red-500">*</span></label>
+                        <input type="text" id="lead-nama" required placeholder="Contoh: Budi Santoso" class="w-full px-5 py-3.5 rounded-xl bg-slate-50 border border-slate-200 outline-none focus:ring-2 focus:ring-brand-pink focus:bg-white transition-all">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-bold text-slate-500 uppercase tracking-wider mb-1 ml-1">No. WhatsApp <span class="text-red-500">*</span></label>
+                        <input type="number" id="lead-wa" required placeholder="Contoh: 081234567890" class="w-full px-5 py-3.5 rounded-xl bg-slate-50 border border-slate-200 outline-none focus:ring-2 focus:ring-brand-pink focus:bg-white transition-all">
+                        <p class="text-[10px] text-slate-400 mt-1 ml-1">*Hasil detail akan dikirim ke WhatsApp ini (Opsional nanti).</p>
+                    </div>
+                    <div>
+                        <label class="block text-xs font-bold text-slate-500 uppercase tracking-wider mb-1 ml-1">Email (Opsional)</label>
+                        <input type="email" id="lead-email" placeholder="budi@email.com" class="w-full px-5 py-3.5 rounded-xl bg-slate-50 border border-slate-200 outline-none focus:ring-2 focus:ring-brand-pink focus:bg-white transition-all">
+                    </div>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+                        <div>
+                            <label class="block text-xs font-bold text-slate-500 uppercase tracking-wider mb-1 ml-1">Asal Sekolah <span class="text-red-500">*</span></label>
+                            <input type="text" id="lead-sekolah" required placeholder="Contoh: SMAN 1" class="w-full px-5 py-3.5 rounded-xl bg-slate-50 border border-slate-200 outline-none focus:ring-2 focus:ring-brand-pink focus:bg-white transition-all">
+                        </div>
+                        <div>
+                            <label class="block text-xs font-bold text-slate-500 uppercase tracking-wider mb-1 ml-1">Kelas <span class="text-red-500">*</span></label>
+                            <select id="lead-kelas" required class="w-full px-5 py-3.5 rounded-xl bg-slate-50 border border-slate-200 outline-none focus:ring-2 focus:ring-brand-pink focus:bg-white transition-all text-slate-700">
+                                <option value="" disabled selected>Pilih Kelas</option>
+                                <option value="12 SMA">12 SMA / SNBT</option>
+                                <option value="11 SMA">11 SMA</option>
+                                <option value="10 SMA">10 SMA</option>
+                            </select>
+                        </div>
+                    </div>
+                    <button type="submit" class="w-full bg-gradient-brand text-white font-bold py-4 rounded-xl hover:shadow-lg hover:-translate-y-1 transition-all mt-4 text-base md:text-lg flex justify-center items-center gap-2 group">
+                        Lanjut Pilih Materi <i class="fas fa-arrow-right group-hover:translate-x-1 transition-transform"></i>
+                    </button>
+                </form>
+            </div>
+            
+            <!-- In-Page CTA Banner -->
+            <div class="mt-8 bg-blue-50 border border-blue-100 p-5 rounded-2xl flex items-start gap-4">
+                <div class="bg-white p-2 rounded-full text-brand-blue shadow-sm shrink-0 mt-1">
+                    <i class="fas fa-info-circle"></i>
+                </div>
+                <div>
+                    <h4 class="font-bold text-slate-700 text-sm">Ingin materi dan ribuan soal yang lebih lengkap?</h4>
+                    <p class="text-xs text-slate-500 mt-1 mb-2">Gabung kelas reguler EXE dan dapatkan akses penuh ke Bank Soal interaktif.</p>
+                    <a href="https://wa.me/6285141525668" target="_blank" class="text-xs font-bold text-brand-blue hover:underline">Tanya Biaya Pendaftaran &rarr;</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- ============================================== -->
+        <!-- VIEW 2: PILIH MATA PELAJARAN                   -->
+        <!-- ============================================== -->
+        <section id="view-mapel" class="view-section w-full max-w-4xl mt-4">
+            <div class="text-center mb-10">
+                <div class="inline-block bg-orange-100 text-brand-orange px-4 py-1.5 rounded-full text-xs font-bold mb-4 uppercase tracking-widest border border-orange-200">
+                    Langkah 2 dari 3
+                </div>
+                <h2 class="text-2xl md:text-3xl font-extrabold text-brand-dark mb-2">Coba Kemampuan TKA kamu</h2>
+                <p class="text-slate-500 text-sm" id="welcome-name">Halo! Silakan pilih satu materi untuk diuji.</p>
+            </div>
+
+            <!-- Grid Mapel -->
+            <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-5 md:gap-6">
+                <!-- Mapel 1 -->
+                <button onclick="startExam('Bahasa Indonesia')" class="bg-white p-6 rounded-3xl shadow-sm border border-slate-100 hover:border-brand-orange hover:shadow-xl hover:-translate-y-1 transition-all group flex flex-col items-center text-center relative overflow-hidden">
+                    <div class="w-16 h-16 bg-orange-50 rounded-full flex items-center justify-center text-brand-orange text-2xl mb-4 group-hover:bg-brand-orange group-hover:text-white transition-colors">
+                        <i class="fas fa-book-open"></i>
+                    </div>
+                    <h3 class="font-bold text-lg text-slate-800 mb-2">Bahasa Indonesia</h3>
+                    <p class="text-xs text-slate-500 mb-4">Tes literasi dan pemahaman bacaan.</p>
+                    <span class="text-xs font-bold text-brand-orange bg-orange-50 px-3 py-1 rounded-lg w-full group-hover:bg-brand-orange group-hover:text-white transition-colors">Mulai Tes (10 Soal)</span>
+                </button>
+
+                <!-- Mapel 2 -->
+                <button onclick="startExam('Matematika Wajib')" class="bg-white p-6 rounded-3xl shadow-sm border border-slate-100 hover:border-brand-pink hover:shadow-xl hover:-translate-y-1 transition-all group flex flex-col items-center text-center relative overflow-hidden">
+                    <div class="absolute top-0 right-0 bg-brand-pink text-white text-[10px] font-bold px-3 py-1 rounded-bl-lg">HOT!</div>
+                    <div class="w-16 h-16 bg-pink-50 rounded-full flex items-center justify-center text-brand-pink text-2xl mb-4 group-hover:bg-brand-pink group-hover:text-white transition-colors">
+                        <i class="fas fa-square-root-variable"></i>
+                    </div>
+                    <h3 class="font-bold text-lg text-slate-800 mb-2">Matematika Wajib</h3>
+                    <p class="text-xs text-slate-500 mb-4">Uji pemahaman aljabar dan hitungan dasar.</p>
+                    <span class="text-xs font-bold text-brand-pink bg-pink-50 px-3 py-1 rounded-lg w-full group-hover:bg-brand-pink group-hover:text-white transition-colors">Mulai Tes (10 Soal)</span>
+                </button>
+                
+                <!-- Mapel 3 -->
+                <button onclick="startExam('Bahasa Inggris')" class="bg-white p-6 rounded-3xl shadow-sm border border-slate-100 hover:border-brand-blue hover:shadow-xl hover:-translate-y-1 transition-all group flex flex-col items-center text-center relative overflow-hidden">
+                    <div class="w-16 h-16 bg-blue-50 rounded-full flex items-center justify-center text-brand-blue text-2xl mb-4 group-hover:bg-brand-blue group-hover:text-white transition-colors">
+                        <i class="fas fa-language"></i>
+                    </div>
+                    <h3 class="font-bold text-lg text-slate-800 mb-2">Bahasa Inggris</h3>
+                    <p class="text-xs text-slate-500 mb-4">Uji tata bahasa dan kosakata bahasa asing.</p>
+                    <span class="text-xs font-bold text-brand-blue bg-blue-50 px-3 py-1 rounded-lg w-full group-hover:bg-brand-blue group-hover:text-white transition-colors">Mulai Tes (10 Soal)</span>
+                </button>
+            </div>
+
+            <!-- In-Page CTA -->
+            <div class="mt-12 text-center">
+                <p class="text-sm text-slate-500 mb-3">Mau coba simulasi utuh seperti ujian asli dengan laporan mendalam?</p>
+                <a href="https://wa.me/6285141525668" target="_blank" class="inline-flex items-center justify-center bg-white border-2 border-slate-200 text-slate-600 px-6 py-3 rounded-xl font-bold hover:border-brand-pink hover:text-brand-pink transition-colors">
+                    Daftar Try Out Premium
+                </a>
+            </div>
+        </section>
+
+        <!-- ============================================== -->
+        <!-- VIEW 3: ENGINE UJIAN                           -->
+        <!-- ============================================== -->
+        <section id="view-exam" class="view-section w-full max-w-4xl">
+            <!-- Header Ujian (Sticky) -->
+            <div class="sticky top-16 md:top-20 z-40 bg-slate-50/95 backdrop-blur-md py-4 mb-6 border-b border-slate-200 flex justify-between items-center">
+                <div>
+                    <span class="text-[10px] font-bold text-slate-400 uppercase tracking-widest block mb-1">Mata Pelajaran</span>
+                    <h2 id="exam-title" class="text-lg md:text-xl font-bold text-brand-dark">Memuat...</h2>
+                </div>
+                <div class="flex flex-col items-end">
+                    <span class="text-[10px] font-bold text-slate-400 uppercase tracking-widest mb-1">Sisa Waktu</span>
+                    <div class="bg-brand-dark text-white px-4 py-1.5 rounded-lg font-mono font-bold text-lg md:text-xl shadow-sm" id="timer-box">--:--</div>
+                </div>
+            </div>
+
+            <!-- Kontainer Soal -->
+            <div id="exam-container" class="space-y-6 md:space-y-8 pb-32">
+                <!-- Soal di-render pakai JS -->
+            </div>
+
+            <!-- Submit Button (Sticky Bottom) -->
+            <div class="fixed bottom-0 left-0 w-full bg-white/95 backdrop-blur-md border-t p-4 flex justify-center z-50">
+                <button onclick="submitExam()" id="btn-submit" class="w-full max-w-md px-6 py-4 bg-gradient-brand text-white rounded-xl font-bold hover:shadow-xl hover:-translate-y-1 transition-all shadow-md text-base md:text-lg flex justify-center items-center gap-2">
+                    <i class="fas fa-paper-plane"></i> Kumpulkan Jawaban
+                </button>
+            </div>
+        </section>
+
+        <!-- ============================================== -->
+        <!-- VIEW 4: HASIL (RESULT & PUSH SALES)            -->
+        <!-- ============================================== -->
+        <section id="view-result" class="view-section w-full max-w-3xl mt-4 text-center">
+            <div class="bg-white p-8 md:p-12 rounded-[2rem] shadow-2xl border border-slate-100 relative overflow-hidden">
+                <!-- Efek Konfeti (CSS Only via background) -->
+                <div class="absolute inset-0 opacity-10" style="background-image: radial-gradient(#d81b60 2px, transparent 2px), radial-gradient(#fbc02d 2px, transparent 2px); background-size: 40px 40px; background-position: 0 0, 20px 20px;"></div>
+                
+                <div class="relative z-10">
+                    <div class="w-20 h-20 bg-green-100 rounded-full flex items-center justify-center text-green-500 text-4xl mx-auto mb-6 shadow-sm">
+                        <i class="fas fa-check-double"></i>
+                    </div>
+                    <h2 class="text-sm md:text-base font-bold text-slate-500 uppercase tracking-widest mb-2">Skor Kamu</h2>
+                    <div class="text-7xl md:text-9xl font-black text-brand-dark mb-4 drop-shadow-sm" id="final-score">0</div>
+                    
+                    <p class="text-slate-600 mb-8 max-w-md mx-auto" id="result-message">
+                        Kerja bagus! Tapi kamu masih bisa meningkatkan skormu lebih tinggi lagi dengan strategi belajar yang tepat.
+                    </p>
+
+                    <!-- SUPER CTA (Sales Pitch) -->
+                    <div class="bg-gradient-brand p-1 rounded-2xl shadow-xl transform transition-transform hover:scale-105 duration-300">
+                        <div class="bg-white p-6 md:p-8 rounded-[15px]">
+                            <h3 class="text-xl font-extrabold text-brand-dark mb-2">Kurang Puas dengan Hasilmu? 📈</h3>
+                            <p class="text-sm text-slate-500 mb-6">Gabung <b>Program Intensif EXE</b> sekarang! Dapatkan akses ke tutor ahli, ribuan bank soal, dan trik cepat menjawab.</p>
+                            <a href="https://wa.me/6285141525668?text=Halo%20Admin,%20saya%20sudah%20coba%20Try%20Out%20Gratis%20dan%20ingin%20tahu%20info%20pendaftaran%20bimbel" target="_blank" class="block w-full bg-brand-dark text-white font-bold py-4 rounded-xl hover:bg-black transition-all shadow-md text-base">
+                                Konsultasi & Daftar Sekarang <i class="fab fa-whatsapp ml-2 text-brand-yellow"></i>
+                            </a>
+                            <p class="text-[10px] text-slate-400 mt-3">*Tunjukkan screenshot skor ini ke Admin untuk <b>Diskon Spesial</b>!</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- SCRIPT LOGIKA -->
+    <script>
+        // --- 1. STATE & DATA ---
+        let leadData = {};
+        let activeMapel = "";
+        let questions = [];
+        let userAnswers = {};
+        let timerInterval;
+        let targetTime;
+
+        // Data Soal Dummy (Akan diganti fetch dari Google Sheets nanti)
+        const DUMMY_QUESTIONS = {
+            'Matematika Wajib': [
+                { no: 1, soal: "Jika f(x) = 2x + 3, berapakah nilai dari f(4)?", opsi: {A: "8", B: "9", C: "10", D: "11", E: "12"}, kunci: "D" },
+                { no: 2, soal: "Turunan pertama dari f(x) = x² + 3x adalah...", opsi: {A: "2x + 3", B: "x + 3", C: "2x", D: "3x", E: "2"}, kunci: "A" },
+                { no: 3, soal: "Akar-akar dari persamaan kuadrat x² - 5x + 6 = 0 adalah...", opsi: {A: "1 dan 6", B: "-2 dan -3", C: "2 dan 3", D: "-1 dan -6", E: "2 dan -3"}, kunci: "C" }
+            ],
+            'Bahasa Indonesia': [
+                { no: 1, soal: "Manakah penulisan kata baku yang paling benar di bawah ini?", opsi: {A: "Apotik", B: "Praktek", C: "Nasehat", D: "Apotek", E: "Himbau"}, kunci: "D" },
+                { no: 2, soal: "Kalimat yang tidak memiliki subjek yang jelas sering disebut sebagai kalimat...", opsi: {A: "Sumbang", B: "Ambigu", C: "Majemuk", D: "Pasif", E: "Tidak efektif"}, kunci: "E" },
+                { no: 3, soal: "Antonim dari kata 'Prolog' adalah...", opsi: {A: "Dialog", B: "Monolog", C: "Epilog", D: "Katalog", E: "Logika"}, kunci: "C" }
+            ],
+            'Bahasa Inggris': [
+                { no: 1, soal: "I ... studying English right now.", opsi: {A: "am", B: "is", C: "are", D: "was", E: "were"}, kunci: "A" },
+                { no: 2, soal: "What is the synonym of the word 'Enormous'?", opsi: {A: "Tiny", B: "Small", C: "Average", D: "Huge", E: "Weak"}, kunci: "D" },
+                { no: 3, soal: "If it rains tomorrow, we ... stay at home.", opsi: {A: "would", B: "could", C: "will", D: "should", E: "are"}, kunci: "C" }
+            ]
+        };
+
+        // --- 2. ROUTING (Ganti Halaman) ---
+        function navigateTo(viewId) {
+            document.querySelectorAll('.view-section').forEach(el => el.classList.remove('active'));
+            document.getElementById(viewId).classList.add('active');
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+            
+            // Sembunyikan Promo Banner kalau lagi ujian
+            if(viewId === 'view-exam') {
+                document.getElementById('promo-banner').style.transform = 'translateY(100%)';
+            }
+        }
+
+        // --- 3. LOGIKA FORM LEAD ---
+        function processLead(e) {
+            e.preventDefault();
+            
+            // Ambil data
+            leadData = {
+                nama: document.getElementById('lead-nama').value,
+                wa: document.getElementById('lead-wa').value,
+                email: document.getElementById('lead-email').value,
+                sekolah: document.getElementById('lead-sekolah').value,
+                kelas: document.getElementById('lead-kelas').value
+            };
+
+            // Di sini NANTI kita bisa Fetch/Kirim data ini (Lead Awal) ke Google Sheets
+            // Contoh: fetch(URL, { method: 'POST', body: JSON.stringify({...leadData, action: 'save_lead'}) })
+            
+            // Pindah halaman & sapa nama
+            document.getElementById('welcome-name').innerText = `Halo ${leadData.nama.split(' ')[0]}! Silakan pilih satu materi untuk diuji.`;
+            navigateTo('view-mapel');
+        }
+
+        // --- 4. LOGIKA MULAI UJIAN ---
+        function startExam(mapel) {
+            activeMapel = mapel;
+            document.getElementById('exam-title').innerText = mapel;
+            
+            // Tarik Soal (Nanti dari fetch GSheet, sekarang Dummy)
+            questions = DUMMY_QUESTIONS[mapel] || [];
+            userAnswers = {};
+            
+            renderQuestions();
+            
+            // Mulai Timer (Misal 15 menit untuk TO Gratis)
+            startTimer(15);
+            
+            navigateTo('view-exam');
+        }
+
+        function renderQuestions() {
+            const container = document.getElementById('exam-container');
+            container.innerHTML = "";
+
+            questions.forEach((q, index) => {
+                let optHTML = "";
+                // Render Radio Buttons Opsi A-E
+                ["A", "B", "C", "D", "E"].forEach(l => {
+                    if (q.opsi[l]) {
+                        optHTML += `
+                        <label class="flex items-center p-3 md:p-4 rounded-xl border border-slate-100 hover:border-brand-pink hover:bg-pink-50/30 cursor-pointer transition-all mb-2 md:mb-3 group">
+                            <input type="radio" name="q${q.no}" value="${l}" onchange="saveAnswer(${q.no}, '${l}')" class="w-4 h-4 md:w-5 md:h-5 accent-brand-pink shrink-0">
+                            <span class="ml-3 md:ml-4 font-bold text-slate-400 shrink-0 text-sm group-hover:text-brand-pink transition-colors">${l}.</span>
+                            <span class="ml-2 flex-1 text-xs md:text-sm text-slate-600">${q.opsi[l]}</span>
+                        </label>`;
+                    }
+                });
+
+                container.innerHTML += `
+                <div class="bg-white p-5 md:p-8 rounded-[2rem] shadow-sm border border-slate-100 relative">
+                    <div class="flex items-start gap-4">
+                        <div class="bg-slate-100 w-8 h-8 md:w-10 md:h-10 rounded-full flex items-center justify-center font-bold text-slate-500 shrink-0 text-xs md:text-sm">
+                            ${index + 1}
+                        </div>
+                        <div class="flex-1">
+                            <div class="text-sm md:text-base font-bold mb-5 text-brand-dark leading-relaxed">${q.soal}</div>
+                            <div class="grid grid-cols-1">
+                                ${optHTML}
+                            </div>
+                        </div>
+                    </div>
+                </div>`;
+            });
+        }
+
+        function saveAnswer(no, val) {
+            userAnswers[no] = val;
+        }
+
+        // --- 5. LOGIKA TIMER ---
+        function startTimer(mins) {
+            clearInterval(timerInterval);
+            targetTime = Date.now() + mins * 60000;
+            
+            const timerBox = document.getElementById('timer-box');
+            
+            timerInterval = setInterval(() => {
+                const diff = targetTime - Date.now();
+                if (diff <= 0) {
+                    clearInterval(timerInterval);
+                    submitExam(); // Auto Kumpul
+                    return;
+                }
+                const m = Math.floor(diff / 60000);
+                const s = Math.floor((diff / 1000) % 60);
+                
+                // Peringatan Merah jika sisa < 3 menit
+                if (m < 3) timerBox.classList.replace('bg-brand-dark', 'bg-red-500');
+                
+                timerBox.innerText = `${String(m).padStart(2, '0')}:${String(s).padStart(2, '0')}`;
+            }, 1000);
+        }
+
+        // --- 6. SUBMIT & CALCULATE SCORE ---
+        function submitExam() {
+            // Animasi Tombol
+            const btn = document.getElementById('btn-submit');
+            btn.innerHTML = "<i class='fas fa-circle-notch fa-spin'></i> Mengkalkulasi...";
+            btn.disabled = true;
+            clearInterval(timerInterval);
+
+            // Hitung Skor (Simpel: Benar = +1, persen = benar/total * 100)
+            let benar = 0;
+            questions.forEach(q => {
+                if (userAnswers[q.no] === q.kunci) {
+                    benar++;
+                }
+            });
+            
+            let skorAkhir = Math.round((benar / questions.length) * 100);
+            
+            // NANTI KITA FETCH KE GOOGLE SHEETS DI SINI:
+            // Mengirim data Lead (Nama, WA) sekaligus Hasil (Mapel, Skor) ke tab Leads_Tryout
+            /*
+            fetch(URL, {
+                method: 'POST',
+                body: JSON.stringify({
+                    action: 'submit_free_to',
+                    nama: leadData.nama, wa: leadData.wa, kelas: leadData.kelas, sekolah: leadData.sekolah,
+                    mapel: activeMapel, skor: skorAkhir
+                })
+            });
+            */
+
+            // Tampilkan Hasil (Delay dikit biar kerasa "Mikir")
+            setTimeout(() => {
+                document.getElementById('final-score').innerText = skorAkhir;
+                
+                // Pesan dinamis
+                const msgBox = document.getElementById('result-message');
+                if(skorAkhir >= 80) msgBox.innerHTML = "Luar biasa! Konsep dasarmu sudah kuat. Pertajam lagi dengan ratusan bank soal HOTS di program kami.";
+                else if(skorAkhir >= 50) msgBox.innerHTML = "Kerja bagus! Tapi kamu masih bisa meningkatkan skormu lebih tinggi lagi dengan strategi belajar yang tepat dari tutor kami.";
+                else msgBox.innerHTML = "Jangan patah semangat! Ini adalah waktu yang tepat untuk memperbaiki pemahaman konsepmu dari dasar bersama tutor EXE.";
+
+                document.getElementById('navbar').classList.add('hidden'); // Sembunyikan navbar biar fokus
+                navigateTo('view-result');
+                btn.innerHTML = "<i class='fas fa-paper-plane'></i> Kumpulkan Jawaban";
+                btn.disabled = false;
+            }, 1000);
+        }
+    </script>
+</body>
+</html>
