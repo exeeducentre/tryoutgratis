@@ -1,0 +1,602 @@
+
+<!DOCTYPE html>
+<html lang="id" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Try Out Gratis - EXE Education Centre</title>
+    
+    <!-- Favicon -->
+    <link rel="icon" href="favicon.png" type="image/png">
+    
+    <!-- Google Fonts: Poppins -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Tailwind Config -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: { sans: ['Poppins', 'sans-serif'] },
+                    colors: {
+                        brand: {
+                            pink: '#d81b60',
+                            orange: '#f57c00',
+                            yellow: '#fbc02d',
+                            dark: '#1f2022',
+                            blue: '#2563eb'
+                        }
+                    }
+                }
+            }
+        };
+    </script>
+
+    <!-- MathJax -->
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>
+        window.MathJax = {
+            tex: {
+                inlineMath: [['$', '$'], ['\\(', '\\)']],
+                displayMath: [['$$', '$$'], ['\\[', '\\]']]
+            },
+            startup: { typeset: false }
+        };
+    </script>
+
+    <style>
+        .bg-gradient-brand { background: linear-gradient(135deg, #d81b60 0%, #f57c00 50%, #fbc02d 100%); }
+        .text-gradient-brand { background: linear-gradient(135deg, #d81b60 0%, #f57c00 50%, #fbc02d 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        
+        .view-section { display: none; animation: fadeIn 0.5s ease-in-out; }
+        .view-section.active { display: block; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(15px); } to { opacity: 1; transform: translateY(0); } }
+        
+        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar-track { background: #f1f1f1; }
+        ::-webkit-scrollbar-thumb { background: #d81b60; border-radius: 10px; }
+        input[type=number]::-webkit-inner-spin-button, 
+        input[type=number]::-webkit-outer-spin-button { -webkit-appearance: none; margin: 0; }
+    </style>
+</head>
+<body class="font-sans text-gray-800 antialiased bg-slate-50 relative min-h-screen flex flex-col selection:bg-brand-pink selection:text-white">
+
+    <!-- NAVBAR -->
+    <nav class="fixed w-full z-50 bg-white/90 backdrop-blur-md shadow-sm border-b border-slate-200 transition-all duration-300" id="navbar">
+        <div class="max-w-5xl mx-auto px-4 sm:px-6 h-16 md:h-20 flex justify-between items-center">
+            <div class="flex items-center gap-3">
+                <img class="h-8 md:h-10 w-auto" src="https://images2.imgbox.com/ad/c5/3XFVIZZN_o.png" alt="Logo EXE">
+                <span class="hidden md:inline-block font-bold text-slate-400 border-l-2 border-slate-200 pl-3 ml-1 text-sm tracking-widest uppercase">Free Try Out</span>
+            </div>
+            <a href="https://wa.me/6285141525668" target="_blank" class="flex items-center gap-2 bg-brand-dark text-white px-4 py-2 md:px-5 md:py-2.5 rounded-full text-xs md:text-sm font-bold hover:bg-black transition-all border-2 border-transparent hover:border-brand-yellow">
+                <i class="fab fa-whatsapp text-brand-yellow"></i>
+                <span class="hidden sm:inline">Tanya Program Spesial</span>
+                <span class="sm:hidden">Daftar</span>
+            </a>
+        </div>
+    </nav>
+
+    <!-- PROMO BANNER -->
+    <div id="promo-banner" class="fixed bottom-0 left-0 w-full bg-gradient-brand text-white p-3 z-[60] flex justify-between items-center shadow-[0_-4px_20px_rgba(0,0,0,0.15)] transition-transform duration-500">
+        <div class="max-w-5xl mx-auto w-full flex justify-between items-center px-4">
+            <div class="flex items-center gap-3">
+                <i class="fas fa-gift text-2xl animate-bounce"></i>
+                <div>
+                    <p class="text-xs md:text-sm font-bold">Daftar Bimbel Bulan Ini, Diskon 10%!</p>
+                    <p class="text-[10px] md:text-xs opacity-90 hidden sm:block">Fasilitas premium, jaminan pemahaman konsep.</p>
+                </div>
+            </div>
+            <div class="flex items-center gap-4">
+                <a href="https://wa.me/6285141525668" target="_blank" class="bg-white text-brand-pink text-xs md:text-sm font-bold px-4 py-1.5 rounded-full hover:shadow-md transition-all whitespace-nowrap">Klaim Promo</a>
+                <button onclick="document.getElementById('promo-banner').style.transform = 'translateY(100%)'" class="text-white hover:text-gray-200"><i class="fas fa-times"></i></button>
+            </div>
+        </div>
+    </div>
+
+    <!-- MAIN WRAPPER -->
+    <main class="flex-grow pt-24 pb-24 px-4 w-full text-brand-dark flex flex-col items-center">
+
+        <!-- VIEW 1: DATA DIRI -->
+        <section id="view-lead" class="view-section active w-full max-w-lg mt-4 md:mt-10">
+            <div class="text-center mb-8">
+                <div class="inline-block bg-pink-100 text-brand-pink px-4 py-1.5 rounded-full text-xs font-bold mb-4 uppercase tracking-widest border border-pink-200">Langkah 1 dari 3</div>
+                <h1 class="text-3xl md:text-4xl font-extrabold text-brand-dark mb-3">Mulai Uji Kemampuanmu!</h1>
+                <p class="text-slate-500 text-sm md:text-base">Isi data singkat ini untuk mendapatkan akses 100% GRATIS ke simulasi Try Out EXE.</p>
+            </div>
+
+            <div class="bg-white p-6 md:p-8 rounded-[2rem] shadow-xl border border-slate-100 relative overflow-hidden">
+                <div class="absolute top-0 right-0 w-32 h-32 bg-gradient-brand opacity-10 rounded-bl-[100px] pointer-events-none"></div>
+                <form id="lead-form" onsubmit="processLead(event)" class="space-y-5 relative z-10">
+                    <div>
+                        <label class="block text-xs font-bold text-slate-500 uppercase tracking-wider mb-1 ml-1">Nama Lengkap <span class="text-red-500">*</span></label>
+                        <input type="text" id="lead-nama" required placeholder="Contoh: Budi Santoso" class="w-full px-5 py-3.5 rounded-xl bg-slate-50 border border-slate-200 outline-none focus:ring-2 focus:ring-brand-pink focus:bg-white transition-all">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-bold text-slate-500 uppercase tracking-wider mb-1 ml-1">No. WhatsApp <span class="text-red-500">*</span></label>
+                        <input type="number" id="lead-wa" required placeholder="Contoh: 081234567890" class="w-full px-5 py-3.5 rounded-xl bg-slate-50 border border-slate-200 outline-none focus:ring-2 focus:ring-brand-pink focus:bg-white transition-all">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-bold text-slate-500 uppercase tracking-wider mb-1 ml-1">Email (Opsional)</label>
+                        <input type="email" id="lead-email" placeholder="budi@email.com" class="w-full px-5 py-3.5 rounded-xl bg-slate-50 border border-slate-200 outline-none focus:ring-2 focus:ring-brand-pink focus:bg-white transition-all">
+                    </div>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+                        <div>
+                            <label class="block text-xs font-bold text-slate-500 uppercase tracking-wider mb-1 ml-1">Asal Sekolah <span class="text-red-500">*</span></label>
+                            <input type="text" id="lead-sekolah" required placeholder="Contoh: SMAN 1" class="w-full px-5 py-3.5 rounded-xl bg-slate-50 border border-slate-200 outline-none focus:ring-2 focus:ring-brand-pink focus:bg-white transition-all">
+                        </div>
+                        <div>
+                            <label class="block text-xs font-bold text-slate-500 uppercase tracking-wider mb-1 ml-1">Kelas <span class="text-red-500">*</span></label>
+                            <select id="lead-kelas" required class="w-full px-5 py-3.5 rounded-xl bg-slate-50 border border-slate-200 outline-none focus:ring-2 focus:ring-brand-pink focus:bg-white transition-all text-slate-700">
+                                <option value="" disabled selected>Pilih Kelas</option>
+                                <option value="12 SMA">12 SMA / SNBT</option>
+                                <option value="11 SMA">11 SMA</option>
+                                <option value="10 SMA">10 SMA</option>
+                            </select>
+                        </div>
+                    </div>
+                    <button type="submit" class="w-full bg-gradient-brand text-white font-bold py-4 rounded-xl hover:shadow-lg hover:-translate-y-1 transition-all mt-4 text-base md:text-lg flex justify-center items-center gap-2 group">
+                        Lanjut Pilih Materi <i class="fas fa-arrow-right group-hover:translate-x-1 transition-transform"></i>
+                    </button>
+                </form>
+            </div>
+        </section>
+
+        <!-- VIEW 2: PILIH MATA PELAJARAN -->
+        <section id="view-mapel" class="view-section w-full max-w-4xl mt-4">
+            <div class="text-center mb-10">
+                <div class="inline-block bg-orange-100 text-brand-orange px-4 py-1.5 rounded-full text-xs font-bold mb-4 uppercase tracking-widest border border-orange-200">Langkah 2 dari 3</div>
+                <h2 class="text-2xl md:text-3xl font-extrabold text-brand-dark mb-2">Coba Kemampuan TKA kamu</h2>
+                <p class="text-slate-500 text-sm" id="welcome-name">Halo! Silakan pilih satu materi untuk diuji.</p>
+            </div>
+
+            <!-- Grid Mapel -->
+            <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-5 md:gap-6">
+                <!-- Mapel 1 -->
+                <button onclick="fetchAndStart('Bahasa Indonesia')" class="bg-white p-6 rounded-3xl shadow-sm border border-slate-100 hover:border-brand-orange hover:shadow-xl hover:-translate-y-1 transition-all group flex flex-col items-center text-center">
+                    <div class="w-16 h-16 bg-orange-50 rounded-full flex items-center justify-center text-brand-orange text-2xl mb-4 group-hover:bg-brand-orange group-hover:text-white transition-colors"><i class="fas fa-book-open"></i></div>
+                    <h3 class="font-bold text-lg text-slate-800 mb-2">Bahasa Indonesia</h3>
+                    <p class="text-xs text-slate-500 mb-4">Tes literasi dan pemahaman bacaan.</p>
+                    <span class="text-xs font-bold text-brand-orange bg-orange-50 px-3 py-1 rounded-lg w-full group-hover:bg-brand-orange group-hover:text-white transition-colors">Mulai Tes</span>
+                </button>
+                <!-- Mapel 2 -->
+                <button onclick="fetchAndStart('Matematika Wajib')" class="bg-white p-6 rounded-3xl shadow-sm border border-slate-100 hover:border-brand-pink hover:shadow-xl hover:-translate-y-1 transition-all group flex flex-col items-center text-center relative overflow-hidden">
+                    <div class="absolute top-0 right-0 bg-brand-pink text-white text-[10px] font-bold px-3 py-1 rounded-bl-lg">HOT!</div>
+                    <div class="w-16 h-16 bg-pink-50 rounded-full flex items-center justify-center text-brand-pink text-2xl mb-4 group-hover:bg-brand-pink group-hover:text-white transition-colors"><i class="fas fa-square-root-variable"></i></div>
+                    <h3 class="font-bold text-lg text-slate-800 mb-2">Matematika Wajib</h3>
+                    <p class="text-xs text-slate-500 mb-4">Uji pemahaman aljabar dan hitungan dasar.</p>
+                    <span class="text-xs font-bold text-brand-pink bg-pink-50 px-3 py-1 rounded-lg w-full group-hover:bg-brand-pink group-hover:text-white transition-colors">Mulai Tes</span>
+                </button>
+                <!-- Mapel 3 -->
+                <button onclick="fetchAndStart('Bahasa Inggris')" class="bg-white p-6 rounded-3xl shadow-sm border border-slate-100 hover:border-brand-blue hover:shadow-xl hover:-translate-y-1 transition-all group flex flex-col items-center text-center">
+                    <div class="w-16 h-16 bg-blue-50 rounded-full flex items-center justify-center text-brand-blue text-2xl mb-4 group-hover:bg-brand-blue group-hover:text-white transition-colors"><i class="fas fa-language"></i></div>
+                    <h3 class="font-bold text-lg text-slate-800 mb-2">Bahasa Inggris</h3>
+                    <p class="text-xs text-slate-500 mb-4">Uji tata bahasa dan kosakata bahasa asing.</p>
+                    <span class="text-xs font-bold text-brand-blue bg-blue-50 px-3 py-1 rounded-lg w-full group-hover:bg-brand-blue group-hover:text-white transition-colors">Mulai Tes</span>
+                </button>
+                <!-- Mapel 4 -->
+                <button onclick="fetchAndStart('Fisika')" class="bg-white p-6 rounded-3xl shadow-sm border border-slate-100 hover:border-purple-500 hover:shadow-xl hover:-translate-y-1 transition-all group flex flex-col items-center text-center">
+                    <div class="w-16 h-16 bg-purple-50 rounded-full flex items-center justify-center text-purple-600 text-2xl mb-4 group-hover:bg-purple-600 group-hover:text-white transition-colors"><i class="fas fa-atom"></i></div>
+                    <h3 class="font-bold text-lg text-slate-800 mb-2">Fisika</h3>
+                    <p class="text-xs text-slate-500 mb-4">Uji pemahaman hukum alam dan rumus gerak.</p>
+                    <span class="text-xs font-bold text-purple-600 bg-purple-50 px-3 py-1 rounded-lg w-full group-hover:bg-purple-600 group-hover:text-white transition-colors">Mulai Tes</span>
+                </button>
+                <!-- Mapel 5 -->
+                <button onclick="fetchAndStart('Kimia')" class="bg-white p-6 rounded-3xl shadow-sm border border-slate-100 hover:border-cyan-500 hover:shadow-xl hover:-translate-y-1 transition-all group flex flex-col items-center text-center">
+                    <div class="w-16 h-16 bg-cyan-50 rounded-full flex items-center justify-center text-cyan-600 text-2xl mb-4 group-hover:bg-cyan-600 group-hover:text-white transition-colors"><i class="fas fa-flask"></i></div>
+                    <h3 class="font-bold text-lg text-slate-800 mb-2">Kimia</h3>
+                    <p class="text-xs text-slate-500 mb-4">Eksplorasi reaksi unsur, molekul, & senyawa.</p>
+                    <span class="text-xs font-bold text-cyan-600 bg-cyan-50 px-3 py-1 rounded-lg w-full group-hover:bg-cyan-600 group-hover:text-white transition-colors">Mulai Tes</span>
+                </button>
+                <!-- Mapel 6 -->
+                <button onclick="fetchAndStart('Biologi')" class="bg-white p-6 rounded-3xl shadow-sm border border-slate-100 hover:border-emerald-500 hover:shadow-xl hover:-translate-y-1 transition-all group flex flex-col items-center text-center">
+                    <div class="w-16 h-16 bg-emerald-50 rounded-full flex items-center justify-center text-emerald-600 text-2xl mb-4 group-hover:bg-emerald-600 group-hover:text-white transition-colors"><i class="fas fa-dna"></i></div>
+                    <h3 class="font-bold text-lg text-slate-800 mb-2">Biologi</h3>
+                    <p class="text-xs text-slate-500 mb-4">Tes penguasaan materi sel dan ekosistem.</p>
+                    <span class="text-xs font-bold text-emerald-600 bg-emerald-50 px-3 py-1 rounded-lg w-full group-hover:bg-emerald-600 group-hover:text-white transition-colors">Mulai Tes</span>
+                </button>
+                <!-- Mapel 7 -->
+                <button onclick="fetchAndStart('Matematika Lanjut')" class="bg-white p-6 rounded-3xl shadow-sm border border-slate-100 hover:border-rose-500 hover:shadow-xl hover:-translate-y-1 transition-all group flex flex-col items-center text-center relative overflow-hidden">
+                    <div class="absolute top-0 right-0 bg-rose-500 text-white text-[10px] font-bold px-3 py-1 rounded-bl-lg">SULIT!</div>
+                    <div class="w-16 h-16 bg-rose-50 rounded-full flex items-center justify-center text-rose-600 text-2xl mb-4 group-hover:bg-rose-600 group-hover:text-white transition-colors"><i class="fas fa-superscript"></i></div>
+                    <h3 class="font-bold text-lg text-slate-800 mb-2">Matematika Lanjut</h3>
+                    <p class="text-xs text-slate-500 mb-4">Tantangan kalkulus & aljabar tingkat lanjut.</p>
+                    <span class="text-xs font-bold text-rose-600 bg-rose-50 px-3 py-1 rounded-lg w-full group-hover:bg-rose-600 group-hover:text-white transition-colors">Mulai Tes</span>
+                </button>
+            </div>
+        </section>
+
+        <!-- VIEW 3: ENGINE UJIAN -->
+        <section id="view-exam" class="view-section w-full max-w-4xl">
+            <!-- Header Ujian -->
+            <div class="sticky top-16 md:top-20 z-40 bg-slate-50/95 backdrop-blur-md py-4 mb-6 border-b border-slate-200 flex justify-between items-center">
+                <div>
+                    <span class="text-[10px] font-bold text-slate-400 uppercase tracking-widest block mb-1">Mata Pelajaran</span>
+                    <h2 id="exam-title" class="text-lg md:text-xl font-bold text-brand-dark">Memuat...</h2>
+                </div>
+                <div class="flex flex-col items-end">
+                    <span class="text-[10px] font-bold text-slate-400 uppercase tracking-widest mb-1">Sisa Waktu</span>
+                    <div class="bg-brand-dark text-white px-4 py-1.5 rounded-lg font-mono font-bold text-lg md:text-xl shadow-sm" id="timer-box">--:--</div>
+                </div>
+            </div>
+
+            <!-- Kontainer Soal -->
+            <div id="exam-container" class="space-y-6 md:space-y-8 pb-32">
+                <!-- Soal di-render dari Script Google Sheets -->
+            </div>
+
+            <!-- Submit Button -->
+            <div class="fixed bottom-0 left-0 w-full bg-white/95 backdrop-blur-md border-t p-4 flex justify-center z-50">
+                <button onclick="submitExam()" id="btn-submit" class="w-full max-w-md px-6 py-4 bg-gradient-brand text-white rounded-xl font-bold hover:shadow-xl hover:-translate-y-1 transition-all shadow-md text-base md:text-lg flex justify-center items-center gap-2">
+                    <i class="fas fa-paper-plane"></i> Kumpulkan Jawaban
+                </button>
+            </div>
+        </section>
+
+        <!-- VIEW 4: HASIL (RESULT) -->
+        <section id="view-result" class="view-section w-full max-w-3xl mt-4 text-center">
+            <div class="bg-white p-8 md:p-12 rounded-[2rem] shadow-2xl border border-slate-100 relative overflow-hidden">
+                <div class="absolute inset-0 opacity-10" style="background-image: radial-gradient(#d81b60 2px, transparent 2px), radial-gradient(#fbc02d 2px, transparent 2px); background-size: 40px 40px; background-position: 0 0, 20px 20px;"></div>
+                
+                <div class="relative z-10">
+                    <div class="w-20 h-20 bg-green-100 rounded-full flex items-center justify-center text-green-500 text-4xl mx-auto mb-6 shadow-sm"><i class="fas fa-check-double"></i></div>
+                    <h2 class="text-sm md:text-base font-bold text-slate-500 uppercase tracking-widest mb-2">Skor Kamu</h2>
+                    <div class="text-7xl md:text-9xl font-black text-brand-dark mb-4 drop-shadow-sm" id="final-score">0</div>
+                    <p class="text-slate-600 mb-8 max-w-md mx-auto" id="result-message">Kerja bagus! Evaluasi hasilnya dan perbaiki belajarmu.</p>
+
+                    <div class="bg-gradient-brand p-1 rounded-2xl shadow-xl transform transition-transform hover:scale-105 duration-300">
+                        <div class="bg-white p-6 md:p-8 rounded-[15px]">
+                            <h3 class="text-xl font-extrabold text-brand-dark mb-2">Kurang Puas dengan Hasilmu? 📈</h3>
+                            <p class="text-sm text-slate-500 mb-6">Gabung <b>Program Intensif EXE</b> sekarang! Dapatkan akses ke tutor ahli, ribuan bank soal, dan trik cepat menjawab.</p>
+                            <a href="https://wa.me/6285141525668" target="_blank" class="block w-full bg-brand-dark text-white font-bold py-4 rounded-xl hover:bg-black transition-all shadow-md text-base">
+                                Konsultasi & Daftar Sekarang <i class="fab fa-whatsapp ml-2 text-brand-yellow"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <script>
+        // --- KONFIGURASI DATABASE GOOGLE SHEETS ---
+        const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbyCOqfHvWi-2cORI1n3jWyepNwnQQEKdJvbMlSvX9G6V3zMuMaeTAlUiT0iR2wbomiH/exec";
+
+        // --- STATE APP ---
+        let leadData = {};
+        let activeMapel = "";
+        let questions = [];
+        let userAnswers = {};
+        let timerInterval;
+        let targetTime;
+        let startTime;
+
+        // --- ROUTING ---
+        function navigateTo(viewId) {
+            document.querySelectorAll('.view-section').forEach(el => el.classList.remove('active'));
+            document.getElementById(viewId).classList.add('active');
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+            if(viewId === 'view-exam') document.getElementById('promo-banner').style.transform = 'translateY(100%)';
+        }
+
+        // --- STEP 1: FORM LEAD ---
+        function processLead(e) {
+            e.preventDefault();
+            leadData = {
+                nama: document.getElementById('lead-nama').value,
+                wa: document.getElementById('lead-wa').value,
+                email: document.getElementById('lead-email').value,
+                sekolah: document.getElementById('lead-sekolah').value,
+                kelas: document.getElementById('lead-kelas').value
+            };
+            document.getElementById('welcome-name').innerText = `Halo ${leadData.nama.split(' ')[0]}! Silakan pilih satu materi untuk diuji.`;
+            navigateTo('view-mapel');
+        }
+
+        // --- STEP 2: FETCH SOAL DARI G-SHEETS ---
+        async function fetchAndStart(mapel) {
+            activeMapel = mapel;
+            document.getElementById('exam-title').innerText = mapel;
+            
+            const container = document.getElementById('exam-container');
+            container.innerHTML = `<div class="text-center py-20"><i class="fas fa-spinner fa-spin text-5xl text-brand-pink mb-4"></i><p class="text-slate-500 font-bold animate-pulse">Menarik soal ujian dari database...</p></div>`;
+            navigateTo('view-exam');
+
+            try {
+                const response = await fetch(`${SCRIPT_URL}?action=getSoal&mapel=${encodeURIComponent(mapel)}`);
+                const result = await response.json();
+                
+                if (result.status === 'success' && result.data.length > 0) {
+                    questions = result.data;
+                    userAnswers = {};
+                    renderQuestionsUI();
+                    startTime = Date.now(); // Catat waktu mulai
+                    startTimer(15); // Timer 15 menit
+                } else {
+                    container.innerHTML = `<div class="text-center py-20 text-slate-500 font-bold"><i class="fas fa-box-open text-4xl mb-3 text-slate-300"></i><br>Wah, soal untuk ${mapel} belum dimasukkan ke database oleh Admin.</div>`;
+                    document.getElementById('timer-box').innerText = "00:00";
+                    document.getElementById('btn-submit').style.display = "none";
+                }
+            } catch (error) {
+                container.innerHTML = `<div class="text-center py-20 text-red-500 font-bold">Gagal terhubung ke database. Pastikan koneksi internet stabil.</div>`;
+                console.error("Fetch Error:", error);
+            }
+        }
+
+        // --- STEP 3: RENDER UI 5 TIPE SOAL ---
+        function renderQuestionsUI() {
+            const container = document.getElementById('exam-container');
+            container.innerHTML = "";
+            document.getElementById('btn-submit').style.display = "flex"; // Munculkan tombol submit
+
+            questions.forEach((q, index) => {
+                let stimulusHTML = "";
+                if (q.stimulus_teks) stimulusHTML += `<div class="text-sm md:text-base text-slate-600 mb-4 whitespace-pre-wrap leading-relaxed">${q.stimulus_teks}</div>`;
+                if (q.stimulus_gambar) stimulusHTML += `<img src="${q.stimulus_gambar}" alt="Ilustrasi" class="max-w-full h-auto rounded-lg mb-4 border border-slate-200">`;
+                
+                let soalHTML = `<div class="text-sm md:text-base font-bold mb-5 text-brand-dark leading-relaxed">${q.pertanyaan}</div>`;
+                let optHTML = "";
+
+                // TIPE 1: PG BIASA (Radio)ATAU KOSONG (Default)
+                if (q.tipe == 1 || !q.tipe) {
+                    ["A", "B", "C", "D", "E"].forEach(l => {
+                        if (q.opsi[l]) {
+                            optHTML += `
+                            <label class="flex items-start p-3 md:p-4 rounded-xl border border-slate-100 hover:border-brand-pink hover:bg-pink-50/30 cursor-pointer transition-all mb-2 md:mb-3 group">
+                                <input type="radio" name="q${q.no}" value="${l}" onchange="saveAnswer(${q.no}, '${l}')" class="mt-1 w-4 h-4 md:w-5 md:h-5 accent-brand-pink shrink-0">
+                                <span class="ml-3 md:ml-4 font-bold text-slate-400 shrink-0 text-sm group-hover:text-brand-pink transition-colors mt-0.5">${l}.</span>
+                                <span class="ml-2 flex-1 text-xs md:text-sm text-slate-600 pt-0.5">${q.opsi[l]}</span>
+                            </label>`;
+                        }
+                    });
+                }
+                // TIPE 2: PG KOMPLEKS (Checkbox)
+                else if (q.tipe == 2) {
+                    optHTML += `<div class="text-[11px] md:text-xs text-brand-pink font-bold mb-3 uppercase tracking-wider bg-pink-50 inline-block px-3 py-1 rounded-md"><i class="fas fa-check-square mr-1"></i> Pilih semua jawaban yang benar</div>`;
+                    ["A", "B", "C", "D", "E"].forEach(l => {
+                        if (q.opsi[l]) {
+                            optHTML += `
+                            <label class="flex items-start p-3 md:p-4 rounded-xl border border-slate-100 hover:border-brand-pink hover:bg-pink-50/30 cursor-pointer transition-all mb-2 md:mb-3 group">
+                                <input type="checkbox" name="q${q.no}" value="${l}" onchange="saveAnswerComplex(${q.no}, '${l}')" class="mt-1 w-4 h-4 md:w-5 md:h-5 accent-brand-pink shrink-0 rounded">
+                                <span class="ml-3 md:ml-4 font-bold text-slate-400 shrink-0 text-sm group-hover:text-brand-pink transition-colors mt-0.5">${l}.</span>
+                                <span class="ml-2 flex-1 text-xs md:text-sm text-slate-600 pt-0.5">${q.opsi[l]}</span>
+                            </label>`;
+                        }
+                    });
+                }
+                // TIPE 3: ANALISIS PERNYATAAN (Benar/Salah)
+                else if (q.tipe == 3) {
+                    let lblBenar = q.opsi.D || "Benar";
+                    let lblSalah = q.opsi.E || "Salah";
+                    optHTML += `
+                    <div class="overflow-x-auto border border-slate-200 rounded-xl">
+                        <table class="w-full text-left text-sm text-slate-600 border-collapse">
+                            <thead>
+                                <tr class="bg-slate-50 border-b border-slate-200">
+                                    <th class="p-3 md:p-4 font-bold border-r border-slate-200">Pernyataan</th>
+                                    <th class="p-3 md:p-4 font-bold text-center w-24 border-r border-slate-200 text-green-600">${lblBenar}</th>
+                                    <th class="p-3 md:p-4 font-bold text-center w-24 text-red-500">${lblSalah}</th>
+                                </tr>
+                            </thead>
+                            <tbody>`;
+                    ["A", "B", "C"].forEach((l, i) => {
+                        if (q.opsi[l]) {
+                            let stmtNo = i + 1; // 1, 2, 3
+                            optHTML += `
+                                <tr class="border-b border-slate-100 hover:bg-slate-50/50 transition-colors">
+                                    <td class="p-3 md:p-4 border-r border-slate-200">${q.opsi[l]}</td>
+                                    <td class="p-3 md:p-4 text-center border-r border-slate-200 hover:bg-green-50 transition-colors">
+                                        <input type="radio" name="q${q.no}_s${stmtNo}" value="${stmtNo}" onchange="saveAnswerBS(${q.no}, ${stmtNo}, true)" class="w-5 h-5 accent-green-500 cursor-pointer">
+                                    </td>
+                                    <td class="p-3 md:p-4 text-center hover:bg-red-50 transition-colors">
+                                        <input type="radio" name="q${q.no}_s${stmtNo}" value="S" onchange="saveAnswerBS(${q.no}, ${stmtNo}, false)" class="w-5 h-5 accent-red-500 cursor-pointer">
+                                    </td>
+                                </tr>`;
+                        }
+                    });
+                    optHTML += `</tbody></table></div>`;
+                }
+                // TIPE 4: P & Q (Kuantitas)
+                else if (q.tipe == 4) {
+                    optHTML += `
+                    <div class="flex justify-center mb-6">
+                        <table class="w-full max-w-md text-center text-sm md:text-base text-slate-700 border-collapse border border-slate-200 rounded-lg overflow-hidden shadow-sm">
+                            <thead>
+                                <tr class="bg-brand-dark text-white">
+                                    <th class="p-3 font-bold border-r border-slate-600 w-1/2">Kuantitas P</th>
+                                    <th class="p-3 font-bold w-1/2">Kuantitas Q</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr class="bg-slate-50">
+                                    <td class="p-4 border-r border-slate-200 font-medium">${q.opsi.A || "-"}</td>
+                                    <td class="p-4 font-medium">${q.opsi.B || "-"}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>`;
+                    
+                    const optionsPQ = [
+                        {v: "A", t: "Kuantitas P lebih besar daripada Q."},
+                        {v: "B", t: "Kuantitas Q lebih besar daripada P."},
+                        {v: "C", t: "Kuantitas P sama dengan Q."},
+                        {v: "D", t: "Informasi yang diberikan tidak cukup untuk memutuskan salah satu dari tiga pilihan di atas."}
+                    ];
+                    optionsPQ.forEach(opt => {
+                        optHTML += `
+                        <label class="flex items-start p-3 md:p-4 rounded-xl border border-slate-100 hover:border-brand-pink hover:bg-pink-50/30 cursor-pointer transition-all mb-2 md:mb-3 group">
+                            <input type="radio" name="q${q.no}" value="${opt.v}" onchange="saveAnswer(${q.no}, '${opt.v}')" class="mt-1 w-4 h-4 md:w-5 md:h-5 accent-brand-pink shrink-0">
+                            <span class="ml-3 md:ml-4 font-bold text-slate-400 shrink-0 text-sm group-hover:text-brand-pink transition-colors mt-0.5">${opt.v}.</span>
+                            <span class="ml-2 flex-1 text-xs md:text-sm text-slate-600 pt-0.5">${opt.t}</span>
+                        </label>`;
+                    });
+                }
+                // TIPE 5: AKD (Kecukupan Data)
+                else if (q.tipe == 5) {
+                    optHTML += `
+                    <div class="bg-blue-50 border border-blue-100 p-4 md:p-5 rounded-xl mb-6 shadow-inner">
+                        <p class="text-xs md:text-sm text-brand-blue font-bold mb-3 uppercase tracking-wider">Putuskan apakah pernyataan (1) dan (2) berikut cukup untuk menjawab pertanyaan tersebut.</p>
+                        <ol class="list-decimal pl-5 text-sm md:text-base text-slate-700 space-y-2 font-medium">
+                            <li>${q.opsi.A || "-"}</li>
+                            <li>${q.opsi.B || "-"}</li>
+                        </ol>
+                    </div>`;
+                    
+                    const optionsAKD = [
+                        {v: "A", t: "Pernyataan (1) SAJA cukup untuk menjawab pertanyaan, tetapi pernyataan (2) SAJA tidak cukup."},
+                        {v: "B", t: "Pernyataan (2) SAJA cukup untuk menjawab pertanyaan, tetapi pernyataan (1) SAJA tidak cukup."},
+                        {v: "C", t: "DUA pernyataan BERSAMA-SAMA cukup untuk menjawab pertanyaan, tetapi SATU pernyataan SAJA tidak cukup."},
+                        {v: "D", t: "Pernyataan (1) SAJA cukup untuk menjawab pertanyaan dan pernyataan (2) SAJA cukup."},
+                        {v: "E", t: "Pernyataan (1) dan pernyataan (2) tidak cukup untuk menjawab pertanyaan."}
+                    ];
+                    optionsAKD.forEach(opt => {
+                        optHTML += `
+                        <label class="flex items-start p-3 md:p-4 rounded-xl border border-slate-100 hover:border-brand-pink hover:bg-pink-50/30 cursor-pointer transition-all mb-2 md:mb-3 group">
+                            <input type="radio" name="q${q.no}" value="${opt.v}" onchange="saveAnswer(${q.no}, '${opt.v}')" class="mt-1 w-4 h-4 md:w-5 md:h-5 accent-brand-pink shrink-0">
+                            <span class="ml-3 md:ml-4 font-bold text-slate-400 shrink-0 text-sm group-hover:text-brand-pink transition-colors mt-0.5">${opt.v}.</span>
+                            <span class="ml-2 flex-1 text-xs md:text-sm text-slate-600 pt-0.5">${opt.t}</span>
+                        </label>`;
+                    });
+                }
+
+                container.innerHTML += `
+                <div class="bg-white p-5 md:p-8 rounded-[2rem] shadow-sm border border-slate-100 relative">
+                    <div class="flex items-start gap-4">
+                        <div class="bg-slate-100 w-8 h-8 md:w-10 md:h-10 rounded-full flex items-center justify-center font-bold text-slate-500 shrink-0 text-xs md:text-sm mt-1">
+                            ${index + 1}
+                        </div>
+                        <div class="flex-1 overflow-hidden">
+                            ${stimulusHTML}
+                            ${soalHTML}
+                            <div class="mt-4">
+                                ${optHTML}
+                            </div>
+                        </div>
+                    </div>
+                </div>`;
+            });
+
+            // Trigger MathJax untuk memproses rumus LaTeX yang ditarik dari Google Sheets
+            if (window.MathJax) {
+                MathJax.typesetPromise([container]).catch((err) => console.log('MathJax error:', err));
+            }
+        }
+
+        // --- PENGELOLAAN JAWABAN BERDASARKAN TIPE SOAL ---
+        // Untuk Tipe 1, 4, 5 (Radio)
+        function saveAnswer(no, val) {
+            userAnswers[no] = val;
+        }
+
+        // Untuk Tipe 2 (Checkbox, Misal kunci: "A,C,E")
+        function saveAnswerComplex(no, val) {
+            if (!userAnswers[no]) userAnswers[no] = [];
+            let arr = userAnswers[no];
+            if (arr.includes(val)) arr = arr.filter(v => v !== val); // Uncheck
+            else arr.push(val); // Check
+            userAnswers[no] = arr.sort(); // Urutkan jadi A,B,C sesuai format kunci Sheets
+        }
+
+        // Untuk Tipe 3 (Benar/Salah, Misal kunci: "1,2,4")
+        function saveAnswerBS(no, stmtNo, isBenar) {
+            if (!userAnswers[no]) userAnswers[no] = [];
+            let arr = userAnswers[no];
+            arr = arr.filter(v => v !== stmtNo); // Hapus existing
+            if (isBenar) arr.push(stmtNo); // Kalau dia pilih benar, masukkan nomor pernyataannya
+            userAnswers[no] = arr.sort((a,b) => a-b); // Urutkan angka
+        }
+
+        // --- TIMER ---
+        function startTimer(mins) {
+            clearInterval(timerInterval);
+            targetTime = Date.now() + mins * 60000;
+            const timerBox = document.getElementById('timer-box');
+            timerBox.classList.replace('bg-red-500', 'bg-brand-dark'); // Reset color
+            
+            timerInterval = setInterval(() => {
+                const diff = targetTime - Date.now();
+                if (diff <= 0) {
+                    clearInterval(timerInterval);
+                    submitExam();
+                    return;
+                }
+                const m = Math.floor(diff / 60000);
+                const s = Math.floor((diff / 1000) % 60);
+                
+                if (m < 3) timerBox.classList.replace('bg-brand-dark', 'bg-red-500');
+                timerBox.innerText = `${String(m).padStart(2, '0')}:${String(s).padStart(2, '0')}`;
+            }, 1000);
+        }
+
+        // --- SUBMIT HASIL KE GOOGLE SHEETS ---
+        async function submitExam() {
+            const btn = document.getElementById('btn-submit');
+            btn.innerHTML = "<i class='fas fa-circle-notch fa-spin'></i> Menyimpan Data...";
+            btn.disabled = true;
+            clearInterval(timerInterval);
+
+            // Hitung Durasi Pengerjaan
+            const timeElapsed = (Date.now() - startTime) / 1000;
+            const mElaps = Math.floor(timeElapsed / 60);
+            const sElaps = Math.floor(timeElapsed % 60);
+            const stringDurasi = `${mElaps} m ${sElaps} d`;
+
+            // Cocokkan Jawaban dengan Kunci di Sheets
+            let benar = 0;
+            questions.forEach(q => {
+                let ans = userAnswers[q.no];
+                let key = q.kunci;
+                
+                // Kalau jawaban berupa array (Tipe 2 dan Tipe 3), ubah ke string pakai koma
+                if (Array.isArray(ans)) ans = ans.join(",");
+                
+                if (ans === key) benar++;
+            });
+            let skorAkhir = questions.length > 0 ? Math.round((benar / questions.length) * 100) : 0;
+            
+            // POST Data ke Apps Script
+            try {
+                await fetch(SCRIPT_URL, {
+                    method: 'POST',
+                    body: JSON.stringify({
+                        action: 'submitResult',
+                        data: {
+                            nama: leadData.nama,
+                            wa: leadData.wa,
+                            email: leadData.email,
+                            sekolah: leadData.sekolah,
+                            kelas: leadData.kelas,
+                            mapel: activeMapel,
+                            skor: skorAkhir,
+                            durasi: stringDurasi
+                        }
+                    })
+                });
+            } catch (err) {
+                console.error("Gagal mengirim data ke Sheets:", err);
+            }
+
+            // Tampilkan Result (Bahkan jika internet laggy, user tetap bisa lihat skornya)
+            document.getElementById('final-score').innerText = skorAkhir;
+            const msgBox = document.getElementById('result-message');
+            if(skorAkhir >= 80) msgBox.innerHTML = "Luar biasa! Konsep dasarmu sudah kuat. Pertajam lagi dengan ratusan bank soal HOTS di program kami.";
+            else if(skorAkhir >= 50) msgBox.innerHTML = "Kerja bagus! Tapi kamu masih bisa meningkatkan skormu lebih tinggi lagi dengan strategi belajar yang tepat dari tutor kami.";
+            else msgBox.innerHTML = "Jangan patah semangat! Ini adalah waktu yang tepat untuk memperbaiki pemahaman konsepmu dari dasar bersama tutor EXE.";
+
+            document.getElementById('navbar').classList.add('hidden');
+            navigateTo('view-result');
+            btn.innerHTML = "<i class='fas fa-paper-plane'></i> Kumpulkan Jawaban";
+            btn.disabled = false;
+        }
+    </script>
+</body>
+</html>
